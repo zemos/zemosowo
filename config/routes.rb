@@ -2,8 +2,10 @@ Zemosowo::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
 
-  root to: 'static_pages#home'
+  #root to: 'static_pages#home'
+ root to: 'microposts#showAll'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
@@ -12,6 +14,8 @@ Zemosowo::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+
+  #match 'showAll' => 'microposts#showAll'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,41 @@
+<% if signed_in? %>
+    <div class="center hero-unit">
+      <h2>All Quotes</h2>
+
+
+      <%= will_paginate @microposts %>
+<ol class="microposts">
+  <%  @microposts.each do |micro| %>
+      <li id="<%= micro.id %>">
+        <span class="content">
+          <%= micro.content %>
+          <br>
+          <span class="timestamp">
+            Posted <%= time_ago_in_words(micro.created_at) %> ago by
+            <span class="user">
+            <%= link_to micro.user.name, micro.user %>
+            </span>
+          </span>
+        </span>
+</li>
+  <% end %>
+ </ol>
+      <%= will_paginate @microposts %>
+    </div>
+<% else %>
+    <div class="center hero-unit">
+      <h1>Welcome to the My Quotes</h1>
+
+      <h2>
+        This is site with amazing quotes. If you want to add or view them please
+      </h2>
+        <%= link_to "Sign in!", signin_path,
+                    class: "btn btn-large btn-primary" %>
+      <h2>
+        <br>or if You don't have account
+      </h2>
+        <%= link_to "Sign up now!", signup_path,
+                    class: "btn btn-large btn-primary" %>
+    </div>
+
+<% end %>
