@@ -1,12 +1,22 @@
 <% if signed_in? %>
-    <div class="center hero-unit">
+
+		<div class="span5 offset7">
+			<%= form_tag root_path, method: :get, id: "microposts_search", class: "form-inline" do %>
+			<%= text_field_tag :query, params[:query] %>
+			<%= submit_tag "Search", name: nil, class: "btn" %>
+			<% end %>
+		</div>
+
+    <div class="center hero-unit"> <% if @microposts.any? %>
       <h2>All Quotes</h2>
-
-
+      <% else %>
+      <h2>Nothing found</h2>
+      <% end %>
       <%= will_paginate @microposts %>
 <ol class="microposts">
   <%  @microposts.each do |micro| %>
       <li id="<%= micro.id %>">
+       
         <span class="content">
           <%= micro.content %>
           <br>
@@ -17,7 +27,7 @@
             </span>
           </span>
         </span>
-</li>
+	</li>
   <% end %>
  </ol>
       <%= will_paginate @microposts %>

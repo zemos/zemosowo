@@ -18,7 +18,7 @@ class MicropostsController < ApplicationController
   end
 
   def showAll
-    @microposts = Micropost.paginate(page: params[:page])
+    @microposts = Micropost.text_search(params[:query]).paginate(page: params[:page])
     respond_to do |format|
       format.html
       format.json { render json: @microposts }
@@ -31,4 +31,5 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.find_by_id(params[:id])
     redirect_to root_path if @micropost.nil?
   end
+ 
 end
